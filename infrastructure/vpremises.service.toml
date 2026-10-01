@@ -1,0 +1,18 @@
+schema = "vpremises://infrastructure/service-requirements/v1"
+service_id = "constillo"
+service_ref = "vpremises://service/constillo@1"
+extends = ["rust-binary", "crowsi-observed"]
+
+[process]
+user = "constillo"
+execution = "oneshot"
+artifact = "constillo"
+
+[state]
+directory = "/var/lib/constillo"
+backup_required = false
+
+[health]
+path = "command://constillo/doctor"
+timeout_seconds = 10
+

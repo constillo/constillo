@@ -1,0 +1,31 @@
+{
+  "schema_version": "constillo.workflow/v1",
+  "workflow_id": "local-foundation-bounded-pilot",
+  "workflow_version": "1.0.0",
+  "steps": [
+    {
+      "id": "validate-evidence",
+      "action": "validate-hat-and-decision-evidence",
+      "depends_on": [],
+      "external_action": false,
+      "approval": { "required": false, "gate_id": null },
+      "idempotency": { "required": false, "key": null }
+    },
+    {
+      "id": "record-decision",
+      "action": "record-bounded-pilot-decision",
+      "depends_on": ["validate-evidence"],
+      "external_action": false,
+      "approval": { "required": false, "gate_id": null },
+      "idempotency": { "required": false, "key": null }
+    },
+    {
+      "id": "prepare-provider-plan",
+      "action": "prepare-provider-plan",
+      "depends_on": ["record-decision"],
+      "external_action": false,
+      "approval": { "required": false, "gate_id": null },
+      "idempotency": { "required": false, "key": null }
+    }
+  ]
+}

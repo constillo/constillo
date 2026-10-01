@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constillo.example/schemas/constillo.workflow.v1.schema.json",
+  "title": "Constillo workflow v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workflow_id",
+    "workflow_version",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "constillo.workflow/v1"
+    },
+    "workflow_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "workflow_version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9._-]+$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "gate_id"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "gate_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "key"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "key": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "action",
+        "depends_on",
+        "external_action",
+        "approval",
+        "idempotency"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "external_action": {
+          "type": "boolean"
+        },
+        "approval": {
+          "$ref": "#/$defs/approval"
+        },
+        "idempotency": {
+          "$ref": "#/$defs/idempotency"
+        }
+      }
+    }
+  }
+}

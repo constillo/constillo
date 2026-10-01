@@ -1,0 +1,12 @@
+{
+  "schema": "tpar.authorized-decision.v1",
+  "decision_id": "decision-96f3e7d9697b0f339e67cc0a",
+  "decision_digest_sha256": "sha256:96f3e7d9697b0f339e67cc0af69823a4414546e896e2a423581db9e341feb16e",
+  "official_hat_id": "hat/source-curator",
+  "hat_manifest_digest_sha256": "sha256:5b82dd0120280ac7f45ef2abbb6baabf9e5a0a3de37f9a5ab90ea00125056602",
+  "proposal_id": "proposal/local-observer-trial",
+  "proposal_fingerprint": "fnv1a64:82d282b01463f01d",
+  "recommended_option_id": "bounded-pilot",
+  "execution_authorized": false,
+  "external_actions": false
+}

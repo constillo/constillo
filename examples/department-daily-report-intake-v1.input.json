@@ -1,0 +1,34 @@
+{
+  "schema": "estate://contracts/workflow-input/v1",
+  "request_id": "request-talent-profile-workflow-20260723",
+  "correlation_id": "report-profile-portfolio-20260723",
+  "workflow_id": "department-daily-report-intake-v1",
+  "workflow_version": "1.0.0",
+  "source": {
+    "service_id": "vpremises",
+    "acquisition_mode": "mounted-folder",
+    "receipt_ref": "vpremises:receipt-24570e137ea09b46e143299d"
+  },
+  "subject": {
+    "kind": "department-daily-report",
+    "id": "talent-profile-report-department-daily-20260723",
+    "headquarters_id": "talent-management",
+    "department_id": "profile-portfolio",
+    "team_id": "profile-portfolio-team-01"
+  },
+  "artifact": {
+    "artifact_id": "talent-profile-report-department-daily-20260723",
+    "schema_id": "estate://operations/department-daily-report/v1",
+    "media_type": "application/json",
+    "digest_sha256": "9bd7eb6f5360ead46c9481b85995b37aabc74513aa7b12ac56e88dcaa21cea5a",
+    "size_bytes": 2241,
+    "opaque_ref": "sharepoint-artifact:talent-profile-report-department-daily-20260723"
+  },
+  "classification": "restricted-sensitive",
+  "customer_data": false,
+  "commission_ref": "service-commission:ecosystem-management-ecosystem-control-commission",
+  "decision_ref": "decision:talent-profile-decision-sensitive-field",
+  "idempotency_key": "sha256:7c276ab982100aa024566c322e9cd16f752ed8c3be9dbd2addd8781983d57259",
+  "execution_mode": "simulation",
+  "external_actions": false
+}

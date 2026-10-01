@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "constillo.workflow-authorization-receipt.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "receipt_id",
+    "receipt_digest_sha256",
+    "workflow_id",
+    "workflow_version",
+    "workflow_plan_digest_sha256",
+    "decision_id",
+    "decision_digest_sha256",
+    "official_hat_id",
+    "hat_manifest_digest_sha256",
+    "recommended_option_id",
+    "executable",
+    "external_actions"
+  ],
+  "properties": {
+    "schema": { "const": "constillo.workflow-authorization-receipt.v1" },
+    "receipt_id": { "type": "string", "pattern": "^workflow-receipt-[0-9a-f]{24}$" },
+    "receipt_digest_sha256": { "$ref": "#/$defs/digest" },
+    "workflow_id": { "$ref": "#/$defs/id" },
+    "workflow_version": { "$ref": "#/$defs/id" },
+    "workflow_plan_digest_sha256": { "$ref": "#/$defs/digest" },
+    "decision_id": { "$ref": "#/$defs/id" },
+    "decision_digest_sha256": { "$ref": "#/$defs/digest" },
+    "official_hat_id": { "$ref": "#/$defs/id" },
+    "hat_manifest_digest_sha256": { "$ref": "#/$defs/digest" },
+    "recommended_option_id": { "$ref": "#/$defs/id" },
+    "executable": { "const": false },
+    "external_actions": { "const": false }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

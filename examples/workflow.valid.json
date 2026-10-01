@@ -1,0 +1,53 @@
+{
+  "schema_version": "constillo.workflow/v1",
+  "workflow_id": "site-release",
+  "workflow_version": "1.0.0",
+  "steps": [
+    {
+      "id": "collect",
+      "action": "collect-build-inputs",
+      "depends_on": [],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "review",
+      "action": "review-release-candidate",
+      "depends_on": [
+        "collect"
+      ],
+      "external_action": false,
+      "approval": {
+        "required": true,
+        "gate_id": "release-owner"
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "publish",
+      "action": "request-publication",
+      "depends_on": [
+        "review"
+      ],
+      "external_action": true,
+      "approval": {
+        "required": true,
+        "gate_id": "publication-owner"
+      },
+      "idempotency": {
+        "required": true,
+        "key": "site-release-v1"
+      }
+    }
+  ]
+}

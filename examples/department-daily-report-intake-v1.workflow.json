@@ -1,0 +1,69 @@
+{
+  "schema_version": "constillo.workflow/v1",
+  "workflow_id": "department-daily-report-intake-v1",
+  "workflow_version": "1.0.0",
+  "steps": [
+    {
+      "id": "validate-acquisition-receipt",
+      "action": "validate-acquisition-receipt",
+      "depends_on": [],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "normalize-workflow-input",
+      "action": "normalize-workflow-input",
+      "depends_on": [
+        "validate-acquisition-receipt"
+      ],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "plan-constillo-input",
+      "action": "plan-constillo-input",
+      "depends_on": [
+        "normalize-workflow-input"
+      ],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "project-corporate-status",
+      "action": "project-corporate-status",
+      "depends_on": [
+        "plan-constillo-input"
+      ],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    }
+  ]
+}

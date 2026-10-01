@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://constillo.example/schemas/constillo.input-validation.v1.schema.json",
+  "title": "Constillo workflow input validation report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "workflow_id",
+    "valid",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "constillo.input-validation/v1"
+    },
+    "request_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "workflow_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string"
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

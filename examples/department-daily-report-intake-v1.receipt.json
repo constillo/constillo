@@ -1,0 +1,68 @@
+{
+  "accepted": true,
+  "artifact_digest_sha256": "9bd7eb6f5360ead46c9481b85995b37aabc74513aa7b12ac56e88dcaa21cea5a",
+  "correlation_id": "report-profile-portfolio-20260723",
+  "executable": false,
+  "external_actions": false,
+  "input_digest": "sha256:2b5d3676c561aefebbef3d5ed704d75f5fff0ef6b9ab25e3237293c0ce065b33",
+  "plan": {
+    "executable": false,
+    "mode": "plan-only",
+    "schema_version": "constillo.plan/v1",
+    "steps": [
+      {
+        "action": "validate-acquisition-receipt",
+        "approval_gate": null,
+        "depends_on": [],
+        "external_action": false,
+        "idempotency_key": null,
+        "level": 0,
+        "sequence": 0,
+        "step_id": "validate-acquisition-receipt"
+      },
+      {
+        "action": "normalize-workflow-input",
+        "approval_gate": null,
+        "depends_on": [
+          "validate-acquisition-receipt"
+        ],
+        "external_action": false,
+        "idempotency_key": null,
+        "level": 1,
+        "sequence": 1,
+        "step_id": "normalize-workflow-input"
+      },
+      {
+        "action": "plan-constillo-input",
+        "approval_gate": null,
+        "depends_on": [
+          "normalize-workflow-input"
+        ],
+        "external_action": false,
+        "idempotency_key": null,
+        "level": 2,
+        "sequence": 2,
+        "step_id": "plan-constillo-input"
+      },
+      {
+        "action": "project-corporate-status",
+        "approval_gate": null,
+        "depends_on": [
+          "plan-constillo-input"
+        ],
+        "external_action": false,
+        "idempotency_key": null,
+        "level": 3,
+        "sequence": 3,
+        "step_id": "project-corporate-status"
+      }
+    ],
+    "workflow_id": "department-daily-report-intake-v1",
+    "workflow_version": "1.0.0"
+  },
+  "receipt_id": "receipt-ba4e0e41370fc351fc7f3f30",
+  "request_id": "request-talent-profile-workflow-20260723",
+  "schema_version": "constillo.input-receipt/v1",
+  "workflow_id": "department-daily-report-intake-v1",
+  "workflow_version": "1.0.0"
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "estate://contracts/workflow-input/v1",
+  "request_id": "request-daily-20260724",
+  "correlation_id": "case-daily-20260724",
+  "workflow_id": "department-daily-intake",
+  "workflow_version": "1.0.0",
+  "source": {
+    "service_id": "vpremises",
+    "acquisition_mode": "mounted-folder",
+    "receipt_ref": "vpremises:receipt-daily-20260724"
+  },
+  "subject": {
+    "kind": "department-daily-report",
+    "id": "daily-report-20260724",
+    "headquarters_id": "corporate-management",
+    "department_id": "business-operations",
+    "team_id": "reporting-operations"
+  },
+  "artifact": {
+    "artifact_id": "artifact-daily-20260724",
+    "schema_id": "estate://operations/department-daily-report/v1",
+    "media_type": "application/json",
+    "digest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "size_bytes": 4096,
+    "opaque_ref": "artifact:daily-report-20260724"
+  },
+  "classification": "internal-confidential",
+  "customer_data": false,
+  "commission_ref": "commission:daily-report-intake",
+  "decision_ref": null,
+  "idempotency_key": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "execution_mode": "simulation",
+  "external_actions": false
+}

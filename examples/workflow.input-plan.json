@@ -1,0 +1,37 @@
+{
+  "schema_version": "constillo.workflow/v1",
+  "workflow_id": "department-daily-intake",
+  "workflow_version": "1.0.0",
+  "steps": [
+    {
+      "id": "verify",
+      "action": "verify-report-metadata",
+      "depends_on": [],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    },
+    {
+      "id": "prepare",
+      "action": "prepare-non-executable-plan",
+      "depends_on": [
+        "verify"
+      ],
+      "external_action": false,
+      "approval": {
+        "required": false,
+        "gate_id": null
+      },
+      "idempotency": {
+        "required": false,
+        "key": null
+      }
+    }
+  ]
+}
