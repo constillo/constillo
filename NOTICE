@@ -2,3 +2,6 @@
 constillo
 Copyright 2026 HAT Inc.
 See LICENSE for the selected terms. Prior grants and third-party licenses retain their respective terms.
+
+CRM condition adapter: migrated Haytai logic, MIT notice retained in
+adapters/crm/LICENSE.haytai. The root Apache-2.0 notice does not replace it.

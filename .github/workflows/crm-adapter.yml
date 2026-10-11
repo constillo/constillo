@@ -1,0 +1,22 @@
+name: CRM planner boundary
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  planner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.15.0'
+          package-manager-cache: false
+      - run: node --test adapters/crm/condition.test.mjs
+      - run: rustup toolchain install 1.97.1 --profile minimal
+      - run: cargo +1.97.1 test --locked

@@ -28,3 +28,11 @@ cargo test --locked
 [Usage guide](docs/getting-started.md)
 
 [Examples](examples) · [Schemas](schemas) · [Implementation and public interfaces](src) · [Verification cases](tests) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md) · [License](LICENSE) · [Attribution notices](NOTICE)
+
+## CRM condition adapter
+
+[adapters/crm](adapters/crm) owns the migrated scalar condition planner.
+`node adapters/crm/cli.mjs` accepts `constillo.crm-condition/v1` on stdin and emits
+a non-executable decision receipt. NERP executes business effects. The migrated
+component retains its MIT attribution in `adapters/crm/LICENSE.haytai`.
+Run `node --test adapters/crm/condition.test.mjs` for its boundary tests.
