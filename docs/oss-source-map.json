@@ -1,0 +1,144 @@
+{
+  "repository": "constillo/constillo",
+  "purpose": "Check whether a workflow is valid and turn it into a repeatable execution plan before handing it to an executor.",
+  "responsibility_boundary": "Own only the documented product/interface scope. Reuse applicable managed common components without forcing unrelated dependencies. Separate synthetic source acceptance from actual account, data and deployment acceptance.",
+  "packages": [
+    {
+      "manifest": "Cargo.toml",
+      "package": "constillo",
+      "ecosystem": "rust",
+      "description": "Deterministic, plan-only workflow validator",
+      "interfaces": {
+        "lib": "src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "authorization::{\n    parse_decision_authorization, plan_authorized, DecisionAuthorization,\n    WorkflowAuthorizationReceipt,\n}",
+          "diagnostics::{Diagnostic, ValidationReport}",
+          "input::{\n    parse_workflow_input_json, plan_input, validate_input, AcquisitionMode, ArtifactReference,\n    ExecutionMode, InformationClassification, InputReceipt, InputSource, InputSubject,\n    InputValidationReport, SubjectKind, WorkflowInput, INPUT_RECEIPT_SCHEMA_VERSION,\n    INPUT_VALIDATION_SCHEMA_VERSION, WORKFLOW_INPUT_SCHEMA,\n}",
+          "json_input::parse_workflow_json",
+          "plan::plan",
+          "plan_model::{PlannedStep, WorkflowPlan}",
+          "workflow_model::{ApprovalPolicy, IdempotencyPolicy, Workflow, WorkflowStep}",
+          "workflow_validation::validate"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    }
+  ],
+  "schema_definitions": [
+    "schemas/constillo.input-receipt.v1.schema.json",
+    "schemas/constillo.input-validation.v1.schema.json",
+    "schemas/constillo.workflow-authorization-receipt.v1.schema.json",
+    "schemas/constillo.workflow-input.v1.schema.json",
+    "schemas/constillo.workflow.v1.schema.json"
+  ],
+  "test_sources": [
+    "adapters/crm/condition.mjs",
+    "adapters/crm/condition.test.mjs",
+    "src/authorization.rs",
+    "src/cli/mod.rs",
+    "src/graph.rs",
+    "src/identifiers.rs",
+    "src/input/digest.rs",
+    "src/input/references.rs",
+    "src/main.rs",
+    "tests/authorization.rs",
+    "tests/cli.rs",
+    "tests/input_contract.rs",
+    "tests/workflow_contract.rs"
+  ],
+  "example_sources": [
+    "examples/authorized-decision.json",
+    "examples/department-daily-report-intake-v1.input.json",
+    "examples/department-daily-report-intake-v1.receipt.json",
+    "examples/department-daily-report-intake-v1.workflow.json",
+    "examples/workflow-input.valid.json",
+    "examples/workflow.authorized.json",
+    "examples/workflow.input-plan.json",
+    "examples/workflow.valid.json"
+  ],
+  "workflow_definitions": [
+    {
+      "path": ".github/workflows/crm-adapter.yml",
+      "jobs": [
+        {
+          "job": "planner",
+          "condition": null,
+          "runs_on": "ubuntu-24.04",
+          "steps": [
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "node --test adapters/crm/condition.test.mjs",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "rustup toolchain install 1.97.1 --profile minimal",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97.1 test --locked",
+              "uses": null,
+              "condition": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": ".github/workflows/oss-policy.yml",
+      "jobs": [
+        {
+          "job": "repository-policy",
+          "condition": null,
+          "runs_on": "ubuntu-latest",
+          "steps": [
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "condition": null
+            },
+            {
+              "name": "Verify repository policy",
+              "run": "python3 .github/oss-policy-check.py",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": "Verify policy regression tests",
+              "run": "cd .github && python3 -m unittest discover -s policy-tests",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": "Check policy types",
+              "run": "python3 -m venv \"$RUNNER_TEMP/policy-types\"\n\"$RUNNER_TEMP/policy-types/bin/pip\" install -r .github/policy/requirements.txt\n\"$RUNNER_TEMP/policy-types/bin/mypy\" --strict .github/policy .github/oss-policy-check.py .github/policy-tests\n",
+              "uses": null,
+              "condition": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "evidence_policy": "Declarations and source paths are not proof of an executed acceptance. Exact CI head and result are recorded separately. No live accounts or production acceptance is inferred."
+}
