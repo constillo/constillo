@@ -15,7 +15,7 @@ Package distribution is not activated by this documentation. Use the checked-in 
 
 ## Getting started
 
-Install Rust 1.97 or newer and make the declared dependencies available. Use the configured private registry when a dependency is not distributed publicly. Run from this repository:
+Install Rust 1.97 or newer and make the declared dependencies available. Resolve declared third-party dependencies from public registries and source-only managed components from their fixed public Git revision. No private registry or adjacent checkout is part of the supported OSS source path. Run from this repository:
 
 ```sh
 cargo test --locked
@@ -36,3 +36,5 @@ cargo test --locked
 a non-executable decision receipt. NERP executes business effects. The migrated
 component retains its MIT attribution in `adapters/crm/LICENSE.haytai`.
 Run `node --test adapters/crm/condition.test.mjs` for its boundary tests.
+
+[OSS responsibility and source completion](docs/oss-source-contract.md) defines the supported package boundary and required acceptance. It does not declare unexecuted source, distribution or production checks complete.
