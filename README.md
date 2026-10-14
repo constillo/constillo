@@ -38,3 +38,5 @@ component retains its MIT attribution in `adapters/crm/LICENSE.haytai`.
 Run `node --test adapters/crm/condition.test.mjs` for its boundary tests.
 
 [OSS responsibility and source completion](docs/oss-source-contract.md) defines the supported package boundary and required acceptance. It does not declare unexecuted source, distribution or production checks complete.
+
+Dependency updates: [repository policy](docs/dependency-updates.md).
