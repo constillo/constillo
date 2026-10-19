@@ -2,7 +2,8 @@
 
 use crate::{plan, Workflow, WorkflowPlan};
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
+mod encoding;
+use encoding::digest;
 
 pub const DECISION_SCHEMA: &str = "tpar.authorized-decision.v1";
 pub const RECEIPT_SCHEMA: &str = "constillo.workflow-authorization-receipt.v1";
@@ -146,8 +147,4 @@ fn valid_digest(value: &str) -> bool {
                 .bytes()
                 .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
     })
-}
-
-fn digest(bytes: &[u8]) -> String {
-    format!("sha256:{:x}", Sha256::digest(bytes))
 }
